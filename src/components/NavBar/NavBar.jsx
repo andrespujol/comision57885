@@ -1,14 +1,16 @@
-import { Flex, Box, Link, Spacer, Heading, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
+import { Flex, Box,  Spacer, Heading, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { BsChevronDown } from 'react-icons/bs';
 import logo from '../../assets/logo.png';
 import CartWidget from '../CartWidget/CartWidget';
-
+import { Link } from 'react-router-dom'
 const NavBar = () => {
     return (
         <Flex p="4" bg="teal.500" align="center">
             <Box p="2">
                 <Heading size="md" color="white">
-                <img src={logo} width={'60%'} alt="Logo" />
+                    <Link to={'/'}>
+                        <img src={logo} width={'60%'} alt="Logo" />
+                    </Link>
                 </Heading>
             </Box>
             <Spacer />
@@ -21,8 +23,8 @@ const NavBar = () => {
                     Categorías
                 </MenuButton>
                 <MenuList >
-                    <MenuItem>Remeras</MenuItem>
-                    <MenuItem>Pantalones</MenuItem>
+                    <MenuItem><Link to={'/category/Remeras'}>Remeras</Link></MenuItem>
+                    <MenuItem><Link to={'/category/Buzos'}>Buzos</Link></MenuItem>
                     <MenuItem>Buzos</MenuItem>
                 </MenuList>
                 </Menu>

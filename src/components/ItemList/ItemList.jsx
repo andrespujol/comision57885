@@ -3,7 +3,6 @@ import Item from '../Item/Item'
 import { Box, Flex } from '@chakra-ui/react'
 
 const ItemList = ({ data }) => {
-    console.log(data)
   return (
     <Flex flexWrap="wrap" justifyContent="space-around">
 
