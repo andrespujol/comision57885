@@ -4,7 +4,8 @@ import { getProducts, getProductsByCategory } from '../../data/asyncMock'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
 import { Spinner } from '@chakra-ui/react'
-const ItemListContainer = ({ title }) => {
+import LoaderComponent from '../LoaderComponent/LoaderComponent'
+const ItemListContainer = ({title}) => {
     const [ data, setData ] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { categoryId } = useParams()
@@ -27,22 +28,17 @@ const ItemListContainer = ({ title }) => {
         }
     }, [categoryId])
 
-    
+    console.log(data)
 
     return (
         <Flex direction={'column'} justify={'center'}  align={'center'} m={4} > 
-            <Box>
+            <LoaderComponent loading={isLoading} />
+            {!isLoading && 
+            <>    
                 <Heading >{title}</Heading>
-            </Box>
-            {isLoading ?<Spinner
-                thickness='4px'
-                speed='0.65s'
-                emptyColor='gray.200'
-                color='blue.500'
-                size='xl'
-                /> 
-                :  <ItemList data={data} />
-            }
+                <Heading>Categoría: {categoryId && categoryId}</Heading>
+                <ItemList data={data}  />
+            </>}
         </Flex>
     )
 }

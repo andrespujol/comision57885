@@ -14,7 +14,7 @@ const ItemList = ({ data }) => {
               maxW="sm"  
               minW="sm"
               >
-                <Item {...productos} />
+                <Item {...productos}  />
             </Box>
         ))}
     </Flex>

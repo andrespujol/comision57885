@@ -25,10 +25,13 @@ const NavBar = () => {
                 <MenuList >
                     <MenuItem><Link to={'/category/Remeras'}>Remeras</Link></MenuItem>
                     <MenuItem><Link to={'/category/Buzos'}>Buzos</Link></MenuItem>
-                    <MenuItem>Buzos</MenuItem>
+                    <MenuItem><Link to={'/category/Pijamas'}>Pijamas</Link></MenuItem>
+                    <MenuItem><Link to={'/category/Zapatillas'}>Zapatillas</Link></MenuItem>
                 </MenuList>
                 </Menu>
-                <CartWidget />
+                <Link to={'/cart'}>
+                    <CartWidget />  
+                </Link>
             </Box>
         </Flex>
     );

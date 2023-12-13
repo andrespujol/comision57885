@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
-import { Card, Image, Stack, Heading, Text, Divider, ButtonGroup, Button, CardBody, CardFooter } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Card, Image, Stack, Heading, Text, Divider, ButtonGroup, Button, CardBody, CardFooter, Link as ChakraLink } from '@chakra-ui/react'
+import { Link as ReactRouterLink } from 'react-router-dom'
+import CartContext from '../../context/CartContext'
+// import { Link } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
-const ItemDetail = ({categoria, descripcion, img, nombre, precio,  id}) => {
+const ItemDetail = ({categoria, descripcion, img, nombre, precio, stock, id}) => {
     const [quantity, setQuantity] = useState(0)
+    const { addItem } = useContext(CartContext)
 
     const onAdd = (quantity) => {
         setQuantity(quantity)
+        const newProduct = {
+          id, nombre, precio
+        }
+        addItem(newProduct, quantity)
         console.log(`Agregaste ${quantity} productos`)
     }
 
   return (
-    <Card maxW='sm' >
+    <Card maxW='sm' mt={10} >
       <CardBody>
         <Image
           src={img}
@@ -33,8 +40,8 @@ const ItemDetail = ({categoria, descripcion, img, nombre, precio,  id}) => {
       </CardBody>
       <Divider />
       <CardFooter>
-        {quantity > 0 ? <Link to={'/cart'}>ir al carrito</Link> :
-        <ItemCount initialValue={1} stock={5} onAdd={onAdd}/>
+           {quantity > 0  ? <ChakraLink as={ReactRouterLink}  to={'/cart'} color='teal.500' fontSize={'1.5rem'}>ir al carrito</ChakraLink> :
+        <ItemCount initialValue={1} stock={stock} onAdd={onAdd}/>
         }
       </CardFooter>
     </Card>
