@@ -4,6 +4,8 @@ import { getProductById } from '../../data/asyncMock'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { Spinner, Box, Heading, Flex } from '@chakra-ui/react'
 import LoaderComponent from '../LoaderComponent/LoaderComponent'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../config/Firebase'
 
 
 const ItemDetailContainer = () => {
@@ -14,13 +16,22 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        getProductById(itemId)
-            .then((prod) => {
-                setProduct(prod)
-            })
-            .catch((err) => console.log(err))
-            .finally(()=> {
-                setIsLoading(false)})
+        const getProduct = async() => {
+          const queryRef = doc(db, 'productos', itemId)
+
+          const response = await getDoc(queryRef)
+
+          const newProduct = {
+            id: response.id,
+            ...response.data()
+          }
+
+          setTimeout(() => {
+            setProduct(newProduct)
+            setIsLoading(false)
+          },500)
+        } 
+        getProduct()
     }, [itemId])
 
 

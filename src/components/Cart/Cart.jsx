@@ -63,6 +63,8 @@ const Cart = () => {
             <Flex justify={'space-around'} align={'center'} width={'70%'} mx="auto" mt={5}>
               <Heading>Precio total: ${getTotal()}</Heading>
               <Button onClick={()=>clearCart()}>Vaciar carrito</Button>
+              <ChakraLink as={ReactRouterLink} to={'/checkout'}>Finalizar la compra</ChakraLink>
+
             </Flex>
           </>
   )
